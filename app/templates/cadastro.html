@@ -1,0 +1,7 @@
+{% extends 'auth_base.html' %}
+{% block title %}Criar conta — FitPulse{% endblock %}
+{% block subtitulo %}Crie sua conta para gerenciar programas e planos.{% endblock %}
+{% block botao %}<i class="bi bi-person-plus-fill me-2"></i>Cadastrar{% endblock %}
+{% block links %}
+<a href="{% url 'login' %}" class="small text-secondary text-decoration-none">Já tem conta? <span style="color: var(--color-primary-light);">Faça login</span></a>
+{% endblock %}

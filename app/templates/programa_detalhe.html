@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}{{ programa.nome }} — FitPulse{% endblock %}
+{% block content %}
+<main class="py-5">
+  <div class="container">
+    <a href="{% url 'programas' %}" class="small text-decoration-none"><i class="bi bi-arrow-left"></i> Voltar aos programas</a>
+    <div class="card-product p-4 p-md-5 mt-3">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+        <div>
+          <h2 class="text-white fw-bold">{{ programa.nome }}</h2>
+          <span class="badge badge-pink">{{ programa.get_objetivo_display }}</span>
+          <span class="badge badge-sale">{{ programa.get_nivel_display }}</span>
+          <span class="badge bg-secondary">{{ programa.duracao_semanas }} semanas</span>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="d-flex gap-2 align-items-start">
+          <a href="{% url 'programa_editar' programa.id %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill me-1"></i>Editar</a>
+          <a href="{% url 'programa_excluir' programa.id %}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-1"></i>Excluir</a>
+        </div>
+        {% endif %}
+      </div>
+      {% if programa.descricao %}<p class="text-secondary">{{ programa.descricao }}</p>{% endif %}
+
+      {% regroup programa.itens.all by dia as treinos %}
+      {% for treino in treinos %}
+      <h5 class="text-white mt-4">Treino {{ treino.grouper }}</h5>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+          <thead><tr><th>Exercício</th><th>Séries</th><th>Repetições</th><th>Descanso</th></tr></thead>
+          <tbody>
+            {% for item in treino.list %}
+            <tr><td>{{ item.exercicio }}</td><td>{{ item.series }}</td><td>{{ item.repeticoes }}</td><td>{{ item.descanso_seg }}s</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% empty %}
+      <p class="text-secondary mt-4">Nenhum exercício cadastrado neste programa.</p>
+      {% endfor %}
+
+      {% if programa.plano_sugerido %}
+      <div class="mt-4 p-3 rounded-3" style="background-color: var(--bg-surface-elevated);">
+        <span class="d-block small text-secondary">Plano alimentar sugerido</span>
+        <a href="{% url 'plano_detalhe' programa.plano_sugerido.id %}" class="fw-semibold text-decoration-none">
+          <i class="bi bi-egg-fried me-1"></i>{{ programa.plano_sugerido.nome }} — {{ programa.plano_sugerido.calorias_dia }} kcal/dia
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+{% endblock %}

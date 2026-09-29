@@ -1,0 +1,44 @@
+:root {
+  --bg-body: #0f111a;
+  --bg-surface: #161924;
+  --bg-surface-elevated: #1e2231;
+  --border-color: #2a2f42;
+  --color-primary: #8E39B3;
+  --color-primary-light: #b565d9;
+  --color-accent: #39d98a;
+}
+
+body { background: var(--bg-body); color: #e6e8ef; }
+a { color: var(--color-primary-light); }
+
+.navbar-custom { background: var(--bg-surface); border-bottom: 1px solid var(--border-color); }
+.nav-link-custom { color: #aeb3c5 !important; }
+.nav-link-custom:hover, .nav-link-custom.active { color: #fff !important; }
+.brand-title { color: var(--color-primary-light); font-weight: 700; }
+
+.card-product { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 1rem; }
+.card-product:hover { border-color: var(--color-primary); }
+.product-img-box { height: 180px; display: flex; align-items: center; justify-content: center;
+  background: var(--bg-surface-elevated); border-radius: .5rem; }
+.product-title { color: #fff; }
+.product-price { color: var(--color-accent); font-weight: 700; font-size: 1.15rem; }
+
+.btn-accent { background: var(--color-primary); color: #fff; border: 0; }
+.btn-accent:hover { background: var(--color-primary-light); color: #fff; }
+
+.badge-pink { background: rgba(142, 57, 179, .25); color: var(--color-primary-light); }
+.badge-sale { background: rgba(57, 217, 138, .2); color: var(--color-accent); }
+.text-tech-green { color: var(--color-accent); }
+
+.login-viewport { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.login-card-container { width: 100%; }
+.login-input-group { background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: .5rem; }
+.login-input-icon { padding: 0 .75rem; color: #8b91a8; }
+.login-input-field { background: transparent !important; border: 0 !important; color: #fff !important; box-shadow: none !important; }
+.alert-error { background: rgba(220, 53, 69, .15); border: 1px solid #dc3545; color: #f1aeb5; border-radius: .5rem; }
+
+.form-control, .form-select { background: var(--bg-surface-elevated); border-color: var(--border-color); color: #fff; }
+.form-control:focus, .form-select:focus { background: var(--bg-surface-elevated); color: #fff; border-color: var(--color-primary); box-shadow: none; }
+
+.table-dark { --bs-table-bg: var(--bg-surface); --bs-table-border-color: var(--border-color); }
+.form-label, .card-product p label { color: #aeb3c5; }

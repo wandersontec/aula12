@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="py-5">
+  <div class="container">
+    <section class="p-5 mb-5 rounded-4" style="background: linear-gradient(135deg, rgba(142, 57, 179, 0.25), rgba(22, 25, 36, 0.95)); border: 1px solid var(--border-color);">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-7">
+          <span class="badge badge-pink mb-3 px-3 py-2">Treino + Alimentação</span>
+          <h1 class="display-4 fw-bold text-white mb-3">Treine forte. Coma bem. Evolua com a <span class="brand-title">FitPulse</span>.</h1>
+          <p class="lead text-secondary mb-4">Programas de exercícios por nível e planos alimentares por objetivo, no mesmo lugar.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="{% url 'programas' %}" class="btn btn-accent px-4 py-2"><i class="bi bi-lightning-charge-fill me-2"></i>Ver Programas</a>
+            <a href="{% url 'planos' %}" class="btn btn-secondary px-4 py-2"><i class="bi bi-egg-fried me-2"></i>Ver Alimentação</a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center">
+          <div class="p-4 rounded-4" style="background-color: var(--bg-surface-elevated); border: 1px solid var(--border-color);">
+            <i class="bi bi-heart-pulse-fill text-tech-green" style="font-size: 5rem;"></i>
+            <h4 class="text-white mt-3">Pronto para começar?</h4>
+            <p class="text-secondary small mb-0">Escolha um programa e o plano alimentar que combina com ele.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-white mb-0">Programas recentes</h3>
+        <a href="{% url 'programas' %}" class="small">Ver todos</a>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        {% for p in programas %}{% include '_card_programa.html' %}
+        {% empty %}<p class="text-secondary">Nenhum programa cadastrado ainda.</p>{% endfor %}
+      </div>
+    </section>
+
+    <section>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-white mb-0">Planos alimentares recentes</h3>
+        <a href="{% url 'planos' %}" class="small">Ver todos</a>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        {% for p in planos %}{% include '_card_plano.html' %}
+        {% empty %}<p class="text-secondary">Nenhum plano cadastrado ainda.</p>{% endfor %}
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

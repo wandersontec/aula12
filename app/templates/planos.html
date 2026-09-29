@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Alimentação — FitPulse{% endblock %}
+{% block content %}
+<main class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary border-opacity-25">
+      <div>
+        <h2 class="text-white fw-bold mb-1">Planos Alimentares</h2>
+        <p class="text-secondary small mb-0">Refeições planejadas para cada objetivo.</p>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge badge-pink">{{ planos|length }} planos</span>
+        {% if user.is_authenticated %}
+        <a href="{% url 'plano_criar' %}" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" title="Novo plano">
+          <i class="bi bi-plus-lg fs-5"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+      {% for p in planos %}{% include '_card_plano.html' %}
+      {% empty %}<div class="col-12 text-center py-5"><p class="text-secondary">Nenhum plano cadastrado no momento.</p></div>{% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}

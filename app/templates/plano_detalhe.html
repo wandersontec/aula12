@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}{{ plano.nome }} — FitPulse{% endblock %}
+{% block content %}
+<main class="py-5">
+  <div class="container">
+    <a href="{% url 'planos' %}" class="small text-decoration-none"><i class="bi bi-arrow-left"></i> Voltar aos planos</a>
+    <div class="card-product p-4 p-md-5 mt-3">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+        <div>
+          <h2 class="text-white fw-bold">{{ plano.nome }}</h2>
+          <span class="badge badge-pink">{{ plano.get_objetivo_display }}</span>
+          <span class="badge badge-sale">{{ plano.calorias_dia }} kcal/dia</span>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="d-flex gap-2 align-items-start">
+          <a href="{% url 'plano_editar' plano.id %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill me-1"></i>Editar</a>
+          <a href="{% url 'plano_excluir' plano.id %}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-1"></i>Excluir</a>
+        </div>
+        {% endif %}
+      </div>
+      {% if plano.descricao %}<p class="text-secondary">{{ plano.descricao }}</p>{% endif %}
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+          <thead><tr><th>Refeição</th><th>Descrição</th><th>kcal</th><th>P (g)</th><th>C (g)</th><th>G (g)</th></tr></thead>
+          <tbody>
+            {% for r in plano.refeicoes.all %}
+            <tr><td>{{ r.get_tipo_display }}</td><td>{{ r.descricao }}</td><td>{{ r.calorias }}</td><td>{{ r.proteina_g }}</td><td>{{ r.carbo_g }}</td><td>{{ r.gordura_g }}</td></tr>
+            {% empty %}
+            <tr><td colspan="6" class="text-secondary">Nenhuma refeição cadastrada.</td></tr>
+            {% endfor %}
+          </tbody>
+          {% if plano.refeicoes.all %}
+          <tfoot><tr><th colspan="2">Total das refeições</th><th>{{ plano.total_calorias }}</th><th colspan="3"></th></tr></tfoot>
+          {% endif %}
+        </table>
+      </div>
+
+      {% if plano.programas.all %}
+      <div class="mt-4">
+        <span class="small text-secondary d-block mb-2">Combina com os programas:</span>
+        {% for p in plano.programas.all %}
+        <a href="{% url 'programa_detalhe' p.id %}" class="badge badge-pink text-decoration-none">{{ p.nome }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+{% endblock %}

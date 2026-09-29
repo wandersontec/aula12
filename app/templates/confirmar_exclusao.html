@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Excluir — FitPulse{% endblock %}
+{% block content %}
+<main class="py-5">
+  <div class="container" style="max-width: 560px;">
+    <div class="card-product p-4 p-md-5 text-center">
+      <i class="bi bi-exclamation-triangle-fill text-danger fs-1"></i>
+      <h3 class="text-white fw-bold my-3">Excluir "{{ objeto.nome }}"?</h3>
+      <p class="text-secondary">Esta ação não pode ser desfeita.</p>
+      <form method="post" class="d-flex justify-content-center gap-2">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-1"></i>Sim, excluir</button>
+        <a href="{{ voltar }}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
